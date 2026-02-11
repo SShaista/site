@@ -33,9 +33,16 @@ function addToCart(productId, name, price, image, size = 'M') {
     }
     
     saveCart();
-    
-    // Animation de confirmation
     showNotification('Produit ajouté au panier !');
+    
+    // Animation sur l'icône panier
+    const cartIcon = document.querySelector('.nav-icons a[href="panier.html"]');
+    if (cartIcon) {
+        cartIcon.style.transform = 'scale(1.2)';
+        setTimeout(() => {
+            cartIcon.style.transform = 'scale(1)';
+        }, 200);
+    }
 }
 
 // Supprimer du panier
@@ -61,24 +68,24 @@ function updateQuantity(productId, size, change) {
 
 // Afficher notification
 function showNotification(message) {
+    // Supprimer ancienne notification
+    const oldNotif = document.querySelector('.notification');
+    if (oldNotif) oldNotif.remove();
+    
     const notif = document.createElement('div');
-    notif.style.cssText = `
-        position: fixed;
-        bottom: 30px;
-        right: 30px;
-        background: var(--noir);
-        color: white;
-        padding: 20px 30px;
-        z-index: 10000;
-        animation: slideIn 0.3s ease;
-        font-weight: 500;
-    `;
+    notif.className = 'notification';
     notif.textContent = message;
     document.body.appendChild(notif);
     
+    // Forcer le reflow
+    notif.offsetHeight;
+    
+    notif.classList.add('show');
+    
     setTimeout(() => {
-        notif.remove();
-    }, 3000);
+        notif.classList.remove('show');
+        setTimeout(() => notif.remove(), 300);
+    }, 2500);
 }
 
 // Rendu de la page panier
@@ -86,13 +93,22 @@ function renderCartPage() {
     const container = document.getElementById('cartItemsList');
     const summarySubtotal = document.getElementById('summarySubtotal');
     const summaryTotal = document.getElementById('summaryTotal');
+    const summaryShipping = document.getElementById('summaryShipping');
     
     if (!container) return;
     
     if (cart.length === 0) {
-        container.innerHTML = '<div style="text-align: center; padding: 60px;">Votre panier est vide</div>';
+        container.innerHTML = `
+            <div style="text-align: center; padding: 60px 20px;">
+                <div style="font-size: 48px; margin-bottom: 20px;">🛒</div>
+                <h3 style="margin-bottom: 10px;">Votre panier est vide</h3>
+                <p style="color: var(--gris); margin-bottom: 20px;">Découvrez nos produits</p>
+                <a href="index.html" class="btn-primary" style="display: inline-block; width: auto; padding: 12px 30px;">Continuer les achats</a>
+            </div>
+        `;
         if (summarySubtotal) summarySubtotal.textContent = '0€';
         if (summaryTotal) summaryTotal.textContent = '0€';
+        if (summaryShipping) summaryShipping.textContent = '-';
         return;
     }
     
@@ -105,14 +121,16 @@ function renderCartPage() {
                 <div class="item-details">
                     <h3>${item.name}</h3>
                     <p>Taille: ${item.size}</p>
+                    <div class="item-qty">
+                        <button onclick="updateQuantity(${item.id}, '${item.size}', -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button onclick="updateQuantity(${item.id}, '${item.size}', 1)">+</button>
+                    </div>
                 </div>
-                <div class="item-qty">
-                    <button onclick="updateQuantity(${item.id}, '${item.size}', -1)">-</button>
-                    <span>${item.quantity}</span>
-                    <button onclick="updateQuantity(${item.id}, '${item.size}', 1)">+</button>
+                <div style="text-align: right;">
+                    <div style="font-weight: 700; margin-bottom: 5px;">${item.price * item.quantity}€</div>
+                    <button class="remove-btn" onclick="removeFromCart(${item.id}, '${item.size}')">×</button>
                 </div>
-                <div style="font-weight: 600;">${item.price * item.quantity}€</div>
-                <button class="remove-btn" onclick="removeFromCart(${item.id}, '${item.size}')">×</button>
             </div>
         `;
     }).join('');
@@ -121,8 +139,8 @@ function renderCartPage() {
     const total = subtotal + shipping;
     
     if (summarySubtotal) summarySubtotal.textContent = subtotal + '€';
-    if (document.getElementById('summaryShipping')) {
-        document.getElementById('summaryShipping').textContent = shipping === 0 ? 'Gratuit' : shipping + '€';
+    if (summaryShipping) {
+        summaryShipping.textContent = shipping === 0 ? 'Gratuit' : shipping + '€';
     }
     if (summaryTotal) summaryTotal.textContent = total + '€';
 }
@@ -130,8 +148,40 @@ function renderCartPage() {
 // Menu mobile
 function toggleMobileMenu() {
     const nav = document.querySelector('.nav-links');
+    const overlay = document.querySelector('.menu-overlay');
+    
+    if (!overlay) {
+        const newOverlay = document.createElement('div');
+        newOverlay.className = 'menu-overlay';
+        newOverlay.onclick = toggleMobileMenu;
+        document.body.appendChild(newOverlay);
+        setTimeout(() => newOverlay.classList.add('active'), 10);
+    } else {
+        overlay.classList.remove('active');
+        setTimeout(() => overlay.remove(), 300);
+    }
+    
     nav.classList.toggle('mobile-open');
+    
+    // Empêcher le scroll du body quand menu ouvert
+    document.body.style.overflow = nav.classList.contains('mobile-open') ? 'hidden' : '';
 }
+
+// Fermer menu en cliquant sur un lien
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        const nav = document.querySelector('.nav-links');
+        const overlay = document.querySelector('.menu-overlay');
+        if (nav.classList.contains('mobile-open')) {
+            nav.classList.remove('mobile-open');
+            if (overlay) {
+                overlay.classList.remove('active');
+                setTimeout(() => overlay.remove(), 300);
+            }
+            document.body.style.overflow = '';
+        }
+    });
+});
 
 // Initialisation
 document.addEventListener('DOMContentLoaded', () => {
@@ -139,6 +189,11 @@ document.addEventListener('DOMContentLoaded', () => {
     renderCartPage();
     
     // Animation au scroll
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -146,12 +201,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 entry.target.style.transform = 'translateY(0)';
             }
         });
-    });
+    }, observerOptions);
     
-    document.querySelectorAll('.product-card').forEach(el => {
+    document.querySelectorAll('.product-card').forEach((el, index) => {
         el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.6s ease';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = `all 0.6s ease ${index * 0.1}s`;
         observer.observe(el);
     });
 });
