@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Panier - NOIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Nouveautés</a></li>
+            <li><a href="homme.html">Homme</a></li>
+            <li><a href="femme.html">Femme</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="cart-page">
+        <h1>Mon Panier</h1>
+        
+        <div class="cart-container">
+            <div class="cart-items-list" id="cartItemsList">
+                <!-- Items injectés par JS -->
+            </div>
+
+            <div class="cart-summary">
+                <h2>Récapitulatif</h2>
+                
+                <div class="summary-row">
+                    <span>Sous-total</span>
+                    <span id="summarySubtotal">0€</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Livraison</span>
+                    <span id="summaryShipping">Calculée à l'étape suivante</span>
+                </div>
+                
+                <div class="summary-row">
+                    <span>Taxes incluses</span>
+                    <span>TVA 20%</span>
+                </div>
+                
+                <div class="summary-row total">
+                    <span>Total</span>
+                    <span id="summaryTotal">0€</span>
+                </div>
+
+                <button class="checkout-btn-large" onclick="location.href='checkout.html'">
+                    Passer la commande
+                </button>
+                
+                <p style="text-align: center; margin-top: 20px; font-size: 12px; color: var(--gris);">
+                    🔒 Paiement 100% sécurisé
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Aide</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NOIR. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+</body>
+</html>

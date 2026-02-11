@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Homme - NOIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Nouveautés</a></li>
+            <li><a href="homme.html" class="active">Homme</a></li>
+            <li><a href="femme.html">Femme</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Collection Homme</h1>
+        <p>Élégance contemporaine et intemporelle</p>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Accueil</a> / <span>Homme</span>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active">Tout</button>
+        <button class="filter-btn">T-shirts</button>
+        <button class="filter-btn">Chemises</button>
+        <button class="filter-btn">Pantalons</button>
+        <button class="filter-btn">Vestes</button>
+        <button class="filter-btn">Accessoires</button>
+    </div>
+
+    <div class="products" id="hommeProducts">
+        <!-- Produits homme -->
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Aide</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">Tailles</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">CGV</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                    <li><a href="#">Mentions légales</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">contact@noir.com</a></li>
+                    <li>+33 1 23 45 67 89</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NOIR. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const produitsHomme = [
+            { id: 10, name: "T-Shirt Oversize Premium", price: 55, oldPrice: 75, image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400" },
+            { id: 11, name: "Chemise Oxford Blanche", price: 89, image: "https://images.unsplash.com/photo-1598033129183-c4f50c736f10?w=400" },
+            { id: 12, name: "Pantalon Chino Beige", price: 95, image: "https://images.unsplash.com/photo-1473966968600-fa801b869a1a?w=400" },
+            { id: 13, name: "Blazer Navy", price: 249, image: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400" },
+            { id: 14, name: "Pull Cachemire Gris", price: 159, image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=400" },
+            { id: 15, name: "Veste en Cuir", price: 399, image: "https://images.unsplash.com/photo-1551028719-00167b16eac5?w=400" }
+        ];
+
+        document.getElementById('hommeProducts').innerHTML = produitsHomme.map(product => `
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-actions">
+                        <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')">
+                            Ajouter au panier
+                        </button>
+                        <button class="btn-quick-view" onclick="location.href='produit.html?id=${product.id}'">👁</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Homme</div>
+                    <a href="produit.html?id=${product.id}" class="product-name">${product.name}</a>
+                    <div class="product-price">
+                        <span class="current-price">${product.price}€</span>
+                        ${product.oldPrice ? `<span class="old-price">${product.oldPrice}€</span>` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

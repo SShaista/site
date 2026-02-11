@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte - NOIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Nouveautés</a></li>
+            <li><a href="homme.html">Homme</a></li>
+            <li><a href="femme.html">Femme</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="account-page">
+        <div class="account-tabs">
+            <button class="account-tab active" onclick="showTab('login')">Connexion</button>
+            <button class="account-tab" onclick="showTab('register')">Créer un compte</button>
+        </div>
+
+        <!-- Formulaire Connexion -->
+        <div id="loginForm" class="tab-content">
+            <form onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <div style="text-align: right; margin-bottom: 20px;">
+                    <a href="#" style="color: var(--gris); font-size: 14px;">Mot de passe oublié ?</a>
+                </div>
+                <button type="submit" class="btn-submit">Se connecter</button>
+            </form>
+        </div>
+
+        <!-- Formulaire Inscription -->
+        <div id="registerForm" class="tab-content" style="display: none;">
+            <form onsubmit="handleRegister(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Prénom</label>
+                        <input type="text" placeholder="Jean" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nom</label>
+                        <input type="text" placeholder="Dupont" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label>Mot de passe</label>
+                    <input type="password" placeholder="8 caractères minimum" required minlength="8">
+                </div>
+                <div class="form-group">
+                    <label>Confirmer le mot de passe</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn-submit">Créer mon compte</button>
+            </form>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        function showTab(tab) {
+            document.querySelectorAll('.account-tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            if (tab === 'login') {
+                document.getElementById('loginForm').style.display = 'block';
+                document.getElementById('registerForm').style.display = 'none';
+            } else {
+                document.getElementById('loginForm').style.display = 'none';
+                document.getElementById('registerForm').style.display = 'block';
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            // Simulation connexion
+            localStorage.setItem('user', JSON.stringify({name: 'Jean Dupont', email: 'jean@example.com'}));
+            showNotification('Connexion réussie !');
+            setTimeout(() => location.href = 'index.html', 1000);
+        }
+
+        function handleRegister(e) {
+            e.preventDefault();
+            showNotification('Compte créé avec succès !');
+            setTimeout(() => location.href = 'index.html', 1000);
+        }
+    </script>
+</body>
+</html>

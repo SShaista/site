@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produit - NOIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Nouveautés</a></li>
+            <li><a href="homme.html">Homme</a></li>
+            <li><a href="femme.html">Femme</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="breadcrumb" style="margin-top: 70px;">
+        <a href="index.html">Accueil</a> / <a href="#" id="categoryLink">Catégorie</a> / <span id="productNameBreadcrumb">Produit</span>
+    </div>
+
+    <section class="product-detail">
+        <div class="product-images">
+            <div class="thumbnails">
+                <img src="" class="active" id="thumb1" onclick="changeImage(this)">
+                <img src="" id="thumb2" onclick="changeImage(this)">
+                <img src="" id="thumb3" onclick="changeImage(this)">
+            </div>
+            <div class="main-image">
+                <img src="" id="mainImage" alt="Produit">
+            </div>
+        </div>
+
+        <div class="product-details">
+            <div id="productCategory" style="text-transform: uppercase; color: var(--gris); font-size: 12px; letter-spacing: 1px; margin-bottom: 10px;">CATEGORIE</div>
+            <h1 id="productTitle">Nom du Produit</h1>
+            <div class="price" id="productPrice">0€</div>
+            
+            <div class="product-description">
+                <p>Découvrez notre pièce iconique, confectionnée avec des matériaux premium pour un confort optimal. 
+                Coupe moderne et intemporelle qui s'adapte à toutes les occasions.</p>
+                <ul style="margin-top: 20px; padding-left: 20px; color: var(--gris);">
+                    <li>Matière : 100% coton bio premium</li>
+                    <li>Fabrication : Portugal</li>
+                    <li>Entretien : Lavage 30°C</li>
+                    <li>Livraison gratuite dès 100€</li>
+                </ul>
+            </div>
+
+            <div class="size-selector">
+                <label>Taille</label>
+                <div class="size-options">
+                    <button class="size-btn" onclick="selectSize(this)">XS</button>
+                    <button class="size-btn active" onclick="selectSize(this)">S</button>
+                    <button class="size-btn" onclick="selectSize(this)">M</button>
+                    <button class="size-btn" onclick="selectSize(this)">L</button>
+                    <button class="size-btn" onclick="selectSize(this)">XL</button>
+                </div>
+            </div>
+
+            <div class="quantity-selector">
+                <label>Quantité</label>
+                <div class="qty-control">
+                    <button onclick="updateQty(-1)">-</button>
+                    <input type="number" value="1" id="qtyInput" readonly>
+                    <button onclick="updateQty(1)">+</button>
+                </div>
+            </div>
+
+            <button class="add-to-cart-large" onclick="addToCartFromPage()">
+                Ajouter au panier - <span id="buttonPrice">0€</span>
+            </button>
+
+            <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #eee;">
+                <div style="display: flex; gap: 30px; color: var(--gris); font-size: 14px;">
+                    <span>🚚 Livraison 2-3 jours</span>
+                    <span>↩️ Retours 30 jours</span>
+                    <span>🔒 Paiement sécurisé</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Aide</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">Tailles</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">contact@noir.com</a></li>
+                    <li>+33 1 23 45 67 89</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Récupérer l'ID du produit depuis l'URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const productId = urlParams.get('id');
+
+        // Base de données simple (en vrai, ça viendrait du backend)
+        const allProducts = [
+            { id: 1, name: "T-Shirt Oversize Noir", price: 45, category: "homme", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600" },
+            { id: 2, name: "Blazer Structuré", price: 189, category: "femme", image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600" },
+            { id: 10, name: "T-Shirt Oversize Premium", price: 55, category: "homme", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=600" },
+            { id: 20, name: "Robe Noire Élégante", price: 149, category: "femme", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=600" },
+            { id: 30, name: "Sac Cuir Minimaliste", price: 159, category: "accessoires", image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=600" }
+        ];
+
+        const product = allProducts.find(p => p.id == productId) || allProducts[0];
+
+        // Remplir la page
+        document.getElementById('productTitle').textContent = product.name;
+        document.getElementById('productPrice').textContent = product.price + '€';
+        document.getElementById('buttonPrice').textContent = product.price + '€';
+        document.getElementById('productCategory').textContent = product.category;
+        document.getElementById('productNameBreadcrumb').textContent = product.name;
+        document.getElementById('categoryLink').textContent = product.category;
+        document.getElementById('categoryLink').href = product.category + '.html';
+
+        // Images
+        document.getElementById('mainImage').src = product.image;
+        document.getElementById('thumb1').src = product.image;
+        document.getElementById('thumb2').src = product.image;
+        document.getElementById('thumb3').src = product.image;
+
+        let selectedSize = 'S';
+        let quantity = 1;
+
+        function selectSize(btn) {
+            document.querySelectorAll('.size-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            selectedSize = btn.textContent;
+        }
+
+        function updateQty(change) {
+            quantity += change;
+            if (quantity < 1) quantity = 1;
+            document.getElementById('qtyInput').value = quantity;
+            document.getElementById('buttonPrice').textContent = (product.price * quantity) + '€';
+        }
+
+        function changeImage(thumb) {
+            document.querySelectorAll('.thumbnails img').forEach(t => t.classList.remove('active'));
+            thumb.classList.add('active');
+            document.getElementById('mainImage').src = thumb.src;
+        }
+
+        function addToCartFromPage() {
+            for (let i = 0; i < quantity; i++) {
+                addToCart(product.id, product.name, product.price, product.image, selectedSize);
+            }
+            showNotification(`${quantity} x ${product.name} ajouté au panier`);
+        }
+    </script>
+</body>
+</html>

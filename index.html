@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOIR - Boutique de Mode Premium</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        
+        <ul class="nav-links">
+            <li><a href="index.html" class="active">Nouveautés</a></li>
+            <li><a href="homme.html">Homme</a></li>
+            <li><a href="femme.html">Femme</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+        </ul>
+        
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+        
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>COLLECTION 2026</h1>
+            <p>L'élégance minimaliste redéfinie</p>
+            <a href="#nouveautes" class="btn-primary">Découvrir</a>
+        </div>
+    </section>
+
+    <!-- Section Nouveautés -->
+    <section id="nouveautes" style="padding: 80px 5%;">
+        <h2 style="text-align: center; font-size: 36px; margin-bottom: 50px; text-transform: uppercase; letter-spacing: 2px;">Nouveautés</h2>
+        
+        <div class="products" id="productsContainer">
+            <!-- Produits injectés par JS -->
+        </div>
+        
+        <div style="text-align: center; margin-top: 50px;">
+            <a href="homme.html" class="btn-primary">Voir tout</a>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section style="padding: 60px 5%; background: var(--gris-clair);">
+        <div style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; text-align: center;">
+            <div>
+                <div style="font-size: 40px; margin-bottom: 15px;">🚚</div>
+                <h3>Livraison Gratuite</h3>
+                <p style="color: var(--gris);">Dès 100€ d'achat</p>
+            </div>
+            <div>
+                <div style="font-size: 40px; margin-bottom: 15px;">↩️</div>
+                <h3>Retours 30 Jours</h3>
+                <p style="color: var(--gris);">Satisfait ou remboursé</p>
+            </div>
+            <div>
+                <div style="font-size: 40px; margin-bottom: 15px;">🔒</div>
+                <h3>Paiement Sécurisé</h3>
+                <p style="color: var(--gris);">100% sécurisé</p>
+            </div>
+            <div>
+                <div style="font-size: 40px; margin-bottom: 15px;">💬</div>
+                <h3>Service Client</h3>
+                <p style="color: var(--gris);">Disponible 24/7</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                    <li><a href="#">Nouveautés</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Aide</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">Tailles</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Entreprise</h3>
+                <ul>
+                    <li><a href="#">À propos</a></li>
+                    <li><a href="#">Carrières</a></li>
+                    <li><a href="#">Presse</a></li>
+                    <li><a href="#">Durabilité</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">contact@noir.com</a></li>
+                    <li><a href="#">+33 1 23 45 67 89</a></li>
+                    <li>Paris, France</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NOIR. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        // Données des nouveautés
+        const nouveautes = [
+            { id: 1, name: "T-Shirt Oversize Noir", price: 45, category: "homme", image: "https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=400", badge: "Nouveau" },
+            { id: 2, name: "Blazer Structuré", price: 189, category: "femme", image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400", badge: "Best-seller" },
+            { id: 3, name: "Jean Slim Vintage", price: 89, category: "homme", image: "https://images.unsplash.com/photo-1542272454315-4c01d7abdf4a?w=400" },
+            { id: 4, name: "Robe Midi Élégante", price: 129, category: "femme", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400" }
+        ];
+
+        // Rendu des produits
+        const container = document.getElementById('productsContainer');
+        container.innerHTML = nouveautes.map(product => `
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    ${product.badge ? `<span class="product-badge">${product.badge}</span>` : ''}
+                    <div class="product-actions">
+                        <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')">
+                            Ajouter au panier
+                        </button>
+                        <button class="btn-quick-view" onclick="location.href='produit.html?id=${product.id}'">👁</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">${product.category}</div>
+                    <a href="produit.html?id=${product.id}" class="product-name">${product.name}</a>
+                    <div class="product-price">
+                        <span class="current-price">${product.price}€</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Collection Femme - NOIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Nouveautés</a></li>
+            <li><a href="homme.html">Homme</a></li>
+            <li><a href="femme.html" class="active">Femme</a></li>
+            <li><a href="accessoires.html">Accessoires</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Collection Femme</h1>
+        <p>Sophistication et modernité</p>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Accueil</a> / <span>Femme</span>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active">Tout</button>
+        <button class="filter-btn">Robes</button>
+        <button class="filter-btn">Tops</button>
+        <button class="filter-btn">Pantalons</button>
+        <button class="filter-btn">Manteaux</button>
+        <button class="filter-btn">Jupes</button>
+    </div>
+
+    <div class="products" id="femmeProducts"></div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Aide</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">Tailles</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">CGV</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">contact@noir.com</a></li>
+                    <li>+33 1 23 45 67 89</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NOIR. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const produitsFemme = [
+            { id: 20, name: "Robe Noire Élégante", price: 149, image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?w=400" },
+            { id: 21, name: "Blazer Oversize", price: 189, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400" },
+            { id: 22, name: "Top en Soie", price: 79, image: "https://images.unsplash.com/photo-1564257631407-4deb1f99d992?w=400" },
+            { id: 23, name: "Pantalon Taille Haute", price: 95, image: "https://images.unsplash.com/photo-1594633312681-425c7b97ccd1?w=400" },
+            { id: 24, name: "Trench Beige", price: 259, image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=400" },
+            { id: 25, name: "Jupe Plissée", price: 69, image: "https://images.unsplash.com/photo-1583496661160-fb5886a0ujj4?w=400" }
+        ];
+
+        document.getElementById('femmeProducts').innerHTML = produitsFemme.map(product => `
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-actions">
+                        <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')">
+                            Ajouter au panier
+                        </button>
+                        <button class="btn-quick-view" onclick="location.href='produit.html?id=${product.id}'">👁</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Femme</div>
+                    <a href="produit.html?id=${product.id}" class="product-name">${product.name}</a>
+                    <div class="product-price">
+                        <span class="current-price">${product.price}€</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>

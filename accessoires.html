@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessoires - NOIR</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html" class="logo">NOIR</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Nouveautés</a></li>
+            <li><a href="homme.html">Homme</a></li>
+            <li><a href="femme.html">Femme</a></li>
+            <li><a href="accessoires.html" class="active">Accessoires</a></li>
+        </ul>
+        <div class="nav-icons">
+            <a href="compte.html">👤</a>
+            <a href="panier.html">
+                🛒
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <div class="page-header">
+        <h1>Accessoires</h1>
+        <p>Les détails qui font la différence</p>
+    </div>
+
+    <div class="breadcrumb">
+        <a href="index.html">Accueil</a> / <span>Accessoires</span>
+    </div>
+
+    <div class="filters">
+        <button class="filter-btn active">Tout</button>
+        <button class="filter-btn">Sacs</button>
+        <button class="filter-btn">Bijoux</button>
+        <button class="filter-btn">Montres</button>
+        <button class="filter-btn">Ceintures</button>
+        <button class="filter-btn">Chapeaux</button>
+    </div>
+
+    <div class="products" id="accessoiresProducts"></div>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Boutique</h3>
+                <ul>
+                    <li><a href="homme.html">Homme</a></li>
+                    <li><a href="femme.html">Femme</a></li>
+                    <li><a href="accessoires.html">Accessoires</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Aide</h3>
+                <ul>
+                    <li><a href="#">Livraison</a></li>
+                    <li><a href="#">Retours</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Légal</h3>
+                <ul>
+                    <li><a href="#">CGV</a></li>
+                    <li><a href="#">Confidentialité</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <ul>
+                    <li><a href="#">contact@noir.com</a></li>
+                    <li>+33 1 23 45 67 89</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 NOIR. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script>
+        const accessoires = [
+            { id: 30, name: "Sac Cuir Minimaliste", price: 159, image: "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=400" },
+            { id: 31, name: "Montre Classique", price: 199, image: "https://images.unsplash.com/photo-1524592094714-0f0654e20314?w=400" },
+            { id: 32, name: "Ceinture Cuir", price: 59, image: "https://images.unsplash.com/photo-1624222247344-550fb60583dc?w=400" },
+            { id: 33, name: "Lunettes de Soleil", price: 129, image: "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=400" },
+            { id: 34, name: "Collier Or Fin", price: 89, image: "https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?w=400" },
+            { id: 35, name: "Chapeau Fedora", price: 75, image: "https://images.unsplash.com/photo-1514327605112-b887c0e61c0a?w=400" }
+        ];
+
+        document.getElementById('accessoiresProducts').innerHTML = accessoires.map(product => `
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="${product.image}" alt="${product.name}">
+                    <div class="product-actions">
+                        <button class="btn-add-cart" onclick="addToCart(${product.id}, '${product.name}', ${product.price}, '${product.image}')">
+                            Ajouter au panier
+                        </button>
+                        <button class="btn-quick-view" onclick="location.href='produit.html?id=${product.id}'">👁</button>
+                    </div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Accessoires</div>
+                    <a href="produit.html?id=${product.id}" class="product-name">${product.name}</a>
+                    <div class="product-price">
+                        <span class="current-price">${product.price}€</span>
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    </script>
+</body>
+</html>
